@@ -8,6 +8,7 @@ import {
 import { CreateCustomerController } from "../controllers/createCustomerController";
 import { ListCustomersController } from "../controllers/listCustomersController";
 import { DeleteCustomerController } from "../controllers/deleteCustomerController";
+import { EditCustomerController } from "../controllers/editCustomerController";
 
 export async function routes(
   fastify: FastifyInstance,
@@ -15,7 +16,7 @@ export async function routes(
 ) {
   // test route
   fastify.get("/test", async (req: FastifyRequest, res: FastifyReply) => {
-    return { ok: true };
+    return { ok: true, message:"hello world :)" };
   });
 
   //create customer route
@@ -35,4 +36,8 @@ export async function routes(
       return new DeleteCustomerController().handle(req, res);
     }
   );
+  // edit customer by ID
+  fastify.patch("/customer", async (req: FastifyRequest, res: FastifyReply) => {
+    return new EditCustomerController().handle(req, res);
+  });
 }
